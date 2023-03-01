@@ -1,10 +1,16 @@
-.App {
+* {
   text-align: center;
+  font-family: 'Jalnan';
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@font-face {
+  font-family: 'Jalnan';
+  src: url(./assets/fonts/Jalnan.ttf);
 }
 
 @media (prefers-reduced-motion: no-preference) {
