@@ -4,6 +4,7 @@ import { Button, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import CatImage from '../assets/cat.jpg';
+import Header from '../components/Header';
 
 function MainPage(): React.ReactElement {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function MainPage(): React.ReactElement {
   return (
     <>
       <Wrapper>
-        <Header>Header</Header>
+        <Header type="title" />
         <ContentWrapper>
           <Title>MainPage</Title>
           <LogoImage>
@@ -58,12 +59,6 @@ const ContentWrapper = styled.div`
   align-items: center;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  background: #ffa07a;
-  font-size: 40pt;
-`;
 const Title = styled.div`
   font-size: 20pt;
 `;
