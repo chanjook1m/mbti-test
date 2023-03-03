@@ -25,9 +25,16 @@ function QuestionPage(): React.ReactElement {
     // console.log(totalScore);
 
     if (questionNumber === questionData.length - 1) {
+      const mbti = Object.keys(totalScore).reduce(
+        (acc, cur) =>
+          (acc +=
+            totalScore[cur] >= 2 ? cur.substring(0, 1) : cur.substring(1, 2)),
+        '',
+      );
+
       navigate({
         pathname: '/result',
-        search: `?${createSearchParams({ mbti: 'aa' })}`,
+        search: `?${createSearchParams({ mbti: `${mbti}` })}`,
       });
     }
   };
