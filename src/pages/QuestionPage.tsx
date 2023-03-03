@@ -4,11 +4,32 @@ import { Button } from 'react-bootstrap';
 
 import { questionData } from '../stores/Question/questionData';
 import Header from '../components/Header';
+import { createSearchParams, useNavigate } from 'react-router-dom';
+
+interface totalScoreType {
+  [key: string]: number;
+}
+
+const totalScore: totalScoreType = { EI: 0, SN: 0, TF: 0, JP: 0 };
 
 function QuestionPage(): React.ReactElement {
   const [questionNumber, setQuestionNumber] = React.useState(0);
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = (answer: number) => {
+    const questionType = questionData[questionNumber].type;
+    totalScore[questionType] += answer;
+
     setQuestionNumber(questionNumber + 1);
+
+    // console.log(totalScore);
+
+    if (questionNumber === questionData.length - 1) {
+      navigate({
+        pathname: '/result',
+        search: `?${createSearchParams({ mbti: 'aa' })}`,
+      });
+    }
   };
 
   return (
@@ -17,10 +38,10 @@ function QuestionPage(): React.ReactElement {
       <ContentWrapper>
         <Title>{questionData[questionNumber].title}</Title>
         <ButtonGroup>
-          <Button variant="danger" onClick={handleButtonClick}>
+          <Button variant="danger" onClick={() => handleButtonClick(1)}>
             {questionData[questionNumber].answer1}
           </Button>
-          <Button variant="warning">
+          <Button variant="warning" onClick={() => handleButtonClick(0)}>
             {questionData[questionNumber].answer2}
           </Button>
         </ButtonGroup>
