@@ -12,7 +12,7 @@ function KaKaoShareButton(props: Props) {
   const resultUrl = window.location.href;
 
   React.useEffect(() => {
-    if (!Kakao.isInitialized) Kakao.init('a837b895c78726f67dddca994ae9041b');
+    Kakao.init('a837b895c78726f67dddca994ae9041b');
   }, []);
 
   const shareKakao = () => {
