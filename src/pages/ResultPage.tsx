@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Image } from 'react-bootstrap';
-import { useSearchParams } from 'react-router-dom';
+import { Image, Button } from 'react-bootstrap';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { resultData } from '../stores/Result/resultData';
 import Header from '../components/Header';
+import KaKaoShareButton from './../components/KaKaoShareButton';
+import { EIResult } from '../stores/Result/types';
 
 function ResultPage(): React.ReactElement {
   const [searchParams] = useSearchParams();
   const mbti = searchParams.get('mbti');
-  const TestResult = resultData.find(cat => cat.best === mbti);
+  const TestResult = resultData.find(cat => cat.best === mbti) as EIResult;
   const FriendResult = resultData.find(
     friend => friend.best === TestResult?.mbti,
   );
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Header type="title" />
@@ -36,6 +40,12 @@ function ResultPage(): React.ReactElement {
           {TestResult?.name}과 잘 맞는 고양이는 {FriendResult?.mbti}형 고양이{' '}
           {FriendResult?.name}
         </FriendDesc>
+        <ActionButtons>
+          <Button variant="danger" onClick={() => navigate('/')}>
+            다시하기
+          </Button>
+          <KaKaoShareButton data={TestResult} />
+        </ActionButtons>
       </ContentWrapper>
     </Wrapper>
   );
@@ -70,4 +80,11 @@ const Desc = styled.div`
 const FriendDesc = styled.div`
   font-size: 13pt;
   color: blue;
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin-top: 100px;
 `;
