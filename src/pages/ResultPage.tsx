@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
 import { resultData } from '../stores/Result/resultData';
